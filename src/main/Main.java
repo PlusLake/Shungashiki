@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -374,6 +375,16 @@ public class Main
 	private void loadExternal()
 	{
 		String root = ClassLoader.getSystemClassLoader().getResource(".").getPath();
+		System.out.println(root);
+		try
+		{
+			root = URLDecoder.decode(root, "UTF-8");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		System.out.println(root);
 		loadImage(root + "/image/");
 		loadTitle(root + "/");
 	}
@@ -383,7 +394,6 @@ public class Main
 		File rootFile = new File(dir);
 		if(!rootFile.exists())
 		{
-
 			return;
 		}
 		for(int x = 0; x < 8; x++)
